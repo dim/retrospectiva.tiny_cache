@@ -1,0 +1,26 @@
+common:  
+  # Valid options: 
+  #   * partitioned_file_store
+  #   * tokyo_store
+  #   * mem_cache_store
+  #   * memcached_store
+  #   * file_store  
+  store: partitioned_file_store
+  
+  pid_file: <%= RAILS_ROOT %>/tmp/pids/tiny_cache.pid
+  log_file: <%= RAILS_ROOT %>/log/tiny_cache.log
+
+file:
+  path: <%= RAILS_ROOT %>/tmp/cache/tiny
+
+tokyo:
+  host: localhost
+  port: 1978
+  database: <%= RAILS_ROOT %>/tmp/cache/tiny_cache.tch
+  threads: 8
+
+mem_cache:
+  servers:
+    - 127.0.0.1:11211
+  memory: 64
+  threads: 1

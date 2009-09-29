@@ -1,0 +1,53 @@
+Tiny Cache
+==============
+
+Efficient cache for Tiny GIT responses.
+Significantly increases code browsing performance.
+
+Backends:
+
+  * Tokyo-Tyrant-Store (highly recommended)
+    Requires the tokyo-cache-store GEM. 
+    Please see http://github.com/dim/tokyo-cache-store/blob/master/README for details 
+
+  * Partitioned File-Store
+		Simple, efficient - could potentially use lots of disk-space. 
+
+  * Memcached-Store (C bindings)
+		Excellent performance - limited storage.
+  
+  * Memcache-Store (native Ruby bindings)
+		Very good performance - limited storage.
+
+  * File-Store
+		Not recommended, since many small files might cause serious performance problems. 
+				
+Usage (General):
+  
+  * Copy the configuration template
+    cp extensions/tiny_cache/config.yml.default extensions/tiny_cache/config.yml     
+
+  * Update the settings (or simply use the defaults)  
+
+  * Install the plugin
+    script/rxm install tiny_git_cache     
+
+  * See the available tasks
+    rake -T | grep tiny:cache
+
+Usage (Tokyo Tyrant):
+
+	* Install all prerequisites
+    Please see http://github.com/dim/tokyo-cache-store/blob/master/README for details
+
+	* Install the tokyo-cache-store GEM
+    sudo gem install dim-tokyo_cache_store --source=http://gems.github.com
+    
+  * Create the DB cache file
+  	rake tiny:cache:tt:create
+
+  * Start the Tokyo Tyrant server
+  	rake tiny:cache:tt:server:start
+  	
+  * Setup a cronjob to optimize the DB cache file (e.g. once daily - optional)
+  	rake tiny:cache:tt:optimize
